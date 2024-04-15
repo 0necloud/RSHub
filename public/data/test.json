@@ -1,0 +1,30 @@
+{
+    "data": [
+        {
+            "title": "Example",
+            "url": "https://example.com/",
+            "tags": ["Example", "Common"],
+            "description": "The domains example.com, example.net, example.org and example.edu are intended for general use in any kind of documentation, such as technical and software documentation, manuals, and sample software configurations."
+        },
+        {
+            "title": "Test Resource",
+            "url": "#",
+            "tags": ["test", "Common"],
+            "description": "Resource for testing"
+        }
+    ],
+    "tagcolors": {
+        "Example": {
+            "color": "red",
+            "text": "white"
+        },
+        "Common": {
+            "color": "darkblue",
+            "text": "white"
+        },
+        "test": {
+            "color": "yellow",
+            "text": "black"
+        }
+    }
+}
