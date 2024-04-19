@@ -49,11 +49,11 @@
           style="width: 100%"
           class="ml-0"
         >
-          <card-view
+          <group-wrapper
             :data="resource"
             :tagcolors="this.resourceData.tagcolors"
             @search="(tag) => tagSearch(tag)"
-          ></card-view>
+          ></group-wrapper>
         </li>
       </ul>
     </div>
@@ -65,7 +65,8 @@
 </template>
 
 <script>
-import CardView from "./CardView.vue";
+import GroupWrapper from "./GroupWrapper.vue";
+// import CardView from "./CardView.vue";
 // import resourceData from "../../public/data/test.json"
 
 export default {
@@ -128,7 +129,8 @@ export default {
     },
   },
   components: {
-    CardView,
+    GroupWrapper
+    // CardView,
   },
 };
 </script>

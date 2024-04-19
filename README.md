@@ -9,3 +9,7 @@ To link the front-end to a JSON file, I recommend using [npoint.io](https://www.
 JSON File Structure:
 
 ![](demo/json.png)
+
+Result:
+
+![](demo/result.png)

@@ -1,6 +1,6 @@
 <template>
   <div class="card flex p-0">
-    <div class="col-10">
+    <div v-if="data['group']" class="col-12" style="border-left: 5px solid green;">
       <div class="col-12 flex" @click="clickHandler()">
         <p class="text-xl">{{ data.title }} <i :class="icon"></i></p>
       </div>
@@ -17,27 +17,40 @@
         >
       </div>
       <div class="col-12 flex" style="text-align: start;">
-        <p v-if="showDesc" style="white-space: pre-line;">{{ data.description }}</p>
+        <ul v-if="showData" class="list-none flexwrap ml-0 pl-0" style="width:100%;">
+          <li
+            v-for="rs in data.data"
+            :key="rs.title"
+            style="width: 100%"
+            class="ml-0 pl-0 mb-3"
+          >
+            <grouped-card-view
+              :data="rs"
+              :tagcolors="tagcolors"
+              @search="(tag) => tagSearch(tag)"
+            ></grouped-card-view>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="col-2 surface-50 p-2" style="min-height: 100%">
-      <Button
-        icon="pi pi-arrow-right"
-        severity="info"
-        rounded
-        outlined
-        aria-label="Filter"
-        @click="redirectToExternalWebsite(data.url)"
-      />
-    </div>
+    <non-grouped-card-view
+      v-else
+      :data="data"
+      :tagcolors="tagcolors"
+      @search="(tag) => tagSearch(tag)"
+      style="box-shadow: 0px 0px !important;"
+    ></non-grouped-card-view>
   </div>
 </template>
 
 <script>
+import NonGroupedCardView from "./NonGroupedCardView.vue";
+import GroupedCardView from "./GroupedCardView.vue";
+
 export default {
   data() {
     return {
-      showDesc: false,
+      showData: false,
     };
   },
   computed: {
@@ -49,7 +62,7 @@ export default {
   },
   methods: {
     clickHandler() {
-      this.showDesc = !this.showDesc;
+      this.showData = !this.showData;
     },
     getTagColor(tagcolors, tag) {
       return (
@@ -59,9 +72,6 @@ export default {
         tagcolors[tag].text +
         ";"
       );
-    },
-    redirectToExternalWebsite(url) {
-      if (url !== "#") window.open(url, '_blank');
     }
   },
   props: {
@@ -75,6 +85,10 @@ export default {
     },
   },
   emits: ["search"],
+  components: {
+    NonGroupedCardView,
+    GroupedCardView
+  },
 };
 </script>
 
