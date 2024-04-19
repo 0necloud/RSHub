@@ -4,7 +4,7 @@ ReSource Hub is a VueJS application that provides searching of a resource JSON o
 
 https://github.com/0necloud/RSHub/assets/60743000/9894a408-8667-44a4-81a5-0f10af1dea42
 
-To link the front-end to a JSON file, I recommend using [npoint.io](https://www.npoint.io/)
+To host the JSON file, I recommend using [npoint.io](https://www.npoint.io/)
 
 ### JSON File Structure:
 
