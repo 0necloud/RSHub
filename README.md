@@ -6,10 +6,12 @@ https://github.com/0necloud/RSHub/assets/60743000/ecbecef2-180a-4127-803d-dfe7f4
 
 To link the front-end to a JSON file, I recommend using [npoint.io](https://www.npoint.io/)
 
-JSON File Structure:
+### JSON File Structure:
 
 ![](demo/json.png)
 
-Result:
+_Note: "group" key can hold any value._
+
+### Result:
 
 ![](demo/result.png)

@@ -27,7 +27,6 @@
             <grouped-card-view
               :data="rs"
               :tagcolors="tagcolors"
-              @search="(tag) => tagSearch(tag)"
             ></grouped-card-view>
           </li>
         </ul>
@@ -37,7 +36,7 @@
       v-else
       :data="data"
       :tagcolors="tagcolors"
-      @search="(tag) => tagSearch(tag)"
+      @search="(tag) => $emit('search', tag)"
       style="box-shadow: 0px 0px !important;"
     ></non-grouped-card-view>
   </div>
