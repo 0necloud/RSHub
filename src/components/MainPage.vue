@@ -52,6 +52,7 @@
           <group-wrapper
             :data="resource"
             :tagcolors="this.resourceData.tagcolors"
+            :searchvalue="searchvalue"
             @search="(tag) => tagSearch(tag)"
           ></group-wrapper>
         </li>
@@ -74,25 +75,53 @@ export default {
     return {
       searchvalue: "",
       resourceURL: "",
-      resourceData: { 'data': [], 'tagcolors': [] },
+      resourceData: { data: [], tagcolors: [] },
       showSettings: false,
     };
   },
   computed: {
     filteredResource() {
-      let search = this.searchvalue;
+      let search = this.searchvalue.toLowerCase();
       const regex = /tag:"([^"]+)"/i;
       const match = regex.exec(search);
 
       if (match) {
-        const tagWord = match[1].toLowerCase(); // Convert extracted tag word to lowercase
-        return this.resourceData.data.filter((item) =>
-          item.tags.some((tag) => tag.toLowerCase() === tagWord)
-        );
+        const tagWord = match[1].toLowerCase(); // Extracted tag word
+        let matchingGroups = [];
+        // Function to recursively search within nested data and return group if found
+        const searchInNestedData = (data, depth = 0) => {
+          let foundCount = 0;
+          for (let i = 0; i < data.length; i++) {
+            const item = data[i];
+            if (
+              item.tags &&
+              item.tags.some((tag) => tag.toLowerCase() === tagWord)
+            ) {
+              if (depth == 0) {
+                matchingGroups.push(item); // Collect group if tag is found
+              }
+              foundCount += 1;
+            }
+            if (item.data && searchInNestedData(item.data, depth++) > 0) {
+              matchingGroups.push(item);
+            }
+          }
+          return foundCount;
+        };
+
+        searchInNestedData(this.resourceData.data);
+        return matchingGroups;
       } else {
-        return this.resourceData.data.filter((item) =>
-          item.title.toLowerCase().includes(search.toLowerCase())
-        );
+        // Regular search when no tag is specified
+        return this.resourceData.data.filter((item) => {
+          if (item.title.toLowerCase().includes(search)) return true;
+          if (item.data) {
+            return item.data.some((nestedItem) =>
+              nestedItem.title.toLowerCase().includes(search)
+            );
+          }
+          return false;
+        });
       }
     },
   },
@@ -125,11 +154,11 @@ export default {
       let responseData = await response.json();
 
       this.resourceData = responseData;
-      console.log(this.resourceData)
+      // console.log(this.resourceData);
     },
   },
   components: {
-    GroupWrapper
+    GroupWrapper,
     // CardView,
   },
 };
@@ -138,7 +167,6 @@ export default {
 <!-- A
     SettingsDialogdd "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 ul {
   list-style-type: none;
   padding: 0;

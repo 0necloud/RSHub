@@ -2,7 +2,7 @@
   <div class="card flex p-0 m-0" style="border-left: 5px solid yellow;">
     <div class="col-10">
       <div class="col-12 flex" @click="clickHandler()">
-        <p class="text-xl">{{ data.title }} <i :class="icon"></i></p>
+        <p class="text-xl" style="text-align: start;">{{ data.title }} <i :class="icon"></i></p>
       </div>
       <div class="col-12 grid">
         <Button
@@ -22,8 +22,8 @@
     </div>
     <div class="col-2 surface-50 p-2" style="min-height: 100%">
       <Button
-        icon="pi pi-arrow-right"
-        severity="info"
+        :icon="getButtonProperties(data.url).icon"
+        :severity="getButtonProperties(data.url).severity"
         rounded
         outlined
         aria-label="Filter"
@@ -59,6 +59,9 @@ export default {
         tagcolors[tag].text +
         ";"
       );
+    },
+    getButtonProperties(url) {
+      return url !== '#' ?  {"icon": "pi pi-arrow-right", "severity": "info"} : {"icon": "pi pi-minus", "severity": "danger"}
     },
     redirectToExternalWebsite(url) {
       if (url !== "#") window.open(url, '_blank');

@@ -7,17 +7,34 @@
             "description": "Resource for testing"
         },
         {
-            "title": "Group Resource",
+            "title": "Tagged Group Resource",
             "group": "true",
             "tags": ["test", "example"],
             "data": [
                 {
-                  "title": "Group Example 1",
+                  "title": "Tagged Group Example 1",
                   "url": "https://example.com/",
                   "description": "The domains example.com, example.net, example.org and example.edu are intended for general use in any kind of documentation, such as technical and software documentation, manuals, and sample software configurations."
                 },
                 {
-                  "title": "Group Example 2",
+                  "title": "Tagged Group Example 2",
+                  "url": "#",
+                  "description": "This is example 2."
+                }
+              ]
+        },
+        {
+            "title": "Untagged Group Resource",
+            "group": "true",
+            "data": [
+                {
+                  "title": "Untagged Group Example 1",
+                  "url": "https://example.com/",
+                  "tags": ["test"],
+                  "description": "The domains example.com, example.net, example.org and example.edu are intended for general use in any kind of documentation, such as technical and software documentation, manuals, and sample software configurations."
+                },
+                {
+                  "title": "Untagged Group Example 2",
                   "url": "#",
                   "description": "This is example 2."
                 }
