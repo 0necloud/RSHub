@@ -98,12 +98,12 @@ export default {
               item.tags.some((tag) => tag.toLowerCase() === tagWord)
             ) {
               if (depth == 0) {
-                matchingGroups.push(item); // Collect group if tag is found
+                matchingGroups.indexOf(item) === -1 ? matchingGroups.push(item) : null;
               }
               foundCount += 1;
             }
-            if (item.data && searchInNestedData(item.data, depth++) > 0) {
-              matchingGroups.push(item);
+            if (item.data && searchInNestedData(item.data, depth + 1) > 0) {
+              matchingGroups.indexOf(item) === -1 ? matchingGroups.push(item) : null;
             }
           }
           return foundCount;

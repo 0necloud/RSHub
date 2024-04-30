@@ -75,18 +75,20 @@ export default {
       const regex = /tag:"([^"]+)"/i;
       const match = regex.exec(search);
 
-      if (match && this.data.tags==undefined) {
+      if (match) {
+        console.log("B");
         const tagWord = match[1].toLowerCase(); // Convert extracted tag word to lowercase
-        return data.filter((rs) => {
+        const res = data.filter((rs) => {
           const tags = rs.tags || []; // If rs.tags is undefined, treat it as an empty array
           return tags.map((t) => t.toLowerCase()).includes(tagWord);
-        });
-      } else if (match && (data.tags === undefined || data.tags === [])) {
-        return data;
+        })
+        return res.length > 0 ? res : data;
       } else {
-        return data.filter((rs) =>
+        console.log("C");
+        const res = data.filter((rs) =>
           rs.title.toLowerCase().includes(search.toLowerCase())
         );
+        return res.length > 0 ? res : data;
       }
     },
   },
