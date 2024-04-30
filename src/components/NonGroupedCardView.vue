@@ -81,10 +81,12 @@ export default {
       this.$toast.add({ severity: "info", detail: url, life: 2000 });
     },
     beginToastSequence(url) {
-      this.timerId = setTimeout(this.toastURL.bind(this, url), 750);
-      setTimeout(() => {
-        clearTimeout(this.intervalId); // Clear interval if the user doesn't let go for >5 seconds
-      }, 5000);
+      if (url != "#") {
+        this.timerId = setTimeout(this.toastURL.bind(this,url), 750);
+        setTimeout(() => {
+          clearTimeout(this.intervalId); // Clear interval if the user doesn't let go for >5 seconds
+        }, 5000);
+      }
     },
     cancelToastSequence() {
       clearTimeout(this.timerId);
