@@ -13,7 +13,6 @@ To host the JSON file, I recommend using [npoint.io](https://www.npoint.io/)
 ### Notes:
 1. "group" key can hold any value.
 2. Nested groups are not supported (yet)
-3. Hold to clear for search bar might not work on mobile devices
 
 ### Preview:
 

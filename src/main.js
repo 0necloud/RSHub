@@ -15,14 +15,17 @@ import InputText from 'primevue/inputtext';
 import FloatLabel from 'primevue/floatlabel';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 
 const app = createApp(App);
 app.use(PrimeVue);
+app.use(ToastService);
 
 app.component('InputText', InputText);
 app.component('FloatLabel', FloatLabel);
 app.component('Button', Button);
 app.component('Dialog', Dialog);
-
+app.component('Toast', Toast);
 
 app.mount("#app");

@@ -36,8 +36,10 @@
           type="text"
           v-model="searchvalue"
           style="width: 100%"
-          @mousedown="mousedown"
-          @mouseup="mouseup"
+          @touchstart="beginClearSearchSequence"
+          @touchend="cancelClearSearchSequence"
+          @mousedown="beginClearSearchSequence"
+          @mouseup="cancelClearSearchSequence"
         />
         <label for="searchbar">Search Resource (Hold to clear)</label>
       </FloatLabel>
@@ -98,12 +100,16 @@ export default {
               item.tags.some((tag) => tag.toLowerCase() === tagWord)
             ) {
               if (depth == 0) {
-                matchingGroups.indexOf(item) === -1 ? matchingGroups.push(item) : null;
+                matchingGroups.indexOf(item) === -1
+                  ? matchingGroups.push(item)
+                  : null;
               }
               foundCount += 1;
             }
             if (item.data && searchInNestedData(item.data, depth + 1) > 0) {
-              matchingGroups.indexOf(item) === -1 ? matchingGroups.push(item) : null;
+              matchingGroups.indexOf(item) === -1
+                ? matchingGroups.push(item)
+                : null;
             }
           }
           return foundCount;
@@ -133,13 +139,13 @@ export default {
       // Clear the search bar
       this.searchvalue = "";
     },
-    mousedown() {
+    beginClearSearchSequence() {
       this.timerId = setTimeout(this.clearSearchBar.bind(this), 750);
       setTimeout(() => {
         clearTimeout(this.intervalId); // Clear interval if the user doesn't let go for >5 seconds
       }, 5000);
     },
-    mouseup() {
+    cancelClearSearchSequence() {
       clearTimeout(this.timerId);
     },
     openSettings() {
